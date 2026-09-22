@@ -3,7 +3,7 @@
 Eyewear E-Commerce & Prescription Lens Configurator
 
 > **Public Engineering Case Study**  
-> This repository is a public engineering case study for ALMADDAH Optics. The production source code is maintained in a private repository.
+> This repository is a public engineering case study. The production source code is maintained privately.
 
 ---
 
@@ -42,8 +42,7 @@ The platform provides a public storefront for customers and an administrative co
 - **Responsive storefront**: Layout designed for desktop, tablet, and mobile viewports.
 - **Product detail pages**: View product specifications, high-resolution imagery, and color-variant switching.
 - **Prescription lens configurator**: Configure lens brand, optical design, and multi-coating options with real-time price updates.
-- **Cart management**: Itemized shopping cart with persistent local state across browser sessions.
-- **Cash-on-delivery checkout**: Single-page checkout with form validation and promotional discount codes.
+- **Cart and Cash on Delivery checkout**: Persistent shopping cart with browser storage, itemized frame and lens pricing, single-page checkout form validation, and promotional discount codes.
 - **Administrative control panel**: Manage product inventory, upload images, update lens pricing rules, curate customer reviews, and inspect incoming orders.
 
 ---
@@ -80,7 +79,7 @@ flowchart TD
     C --> D[(MySQL / MariaDB Database<br/>InnoDB · utf8mb4)]
 ```
 
-The browser storefront communicates with the backend exclusively via HTTP requests receiving structured JSON responses (`backend/api.php` for the storefront and `backend/admin_api.php` for administration). Database communication uses PDO prepared statements to guard against SQL injection. Database initialization and schema checks verify required tables and columns during application bootstrapping.
+The browser storefront communicates with the backend exclusively via HTTP requests receiving structured JSON responses (`backend/api.php` for the storefront and `backend/admin_api.php` for administration). Database communication uses PDO prepared statements to guard against SQL injection. The application checks required database tables and columns during initialization and applies the necessary schema updates.
 
 For detailed layer descriptions and design decisions, see [docs/architecture.md](docs/architecture.md).
 
@@ -131,7 +130,7 @@ Responsive viewport implementation preserving navigation, catalog filters, and c
 - **Dynamic Catalog Filtering**: Instant client-side filtering across gender categories and eyewear utility types without page reloads.
 - **Decoupled Cart State**: Client-side cart state stored in `localStorage` retains configured items and lens metadata across page navigations without requiring upfront user authentication.
 - **Unified Frame & Lens Data Structure**: Lens specifications are directly encapsulated within order items, ensuring optical laboratory requirements remain attached to the correct physical frame throughout fulfillment.
-- **Database Schema Validation**: Automated schema inspection on startup checks table structures and ensures necessary columns are present across deployment environments.
+- **Database initialization and schema checks**: The application checks required database tables and columns during initialization and applies the necessary schema updates.
 
 ---
 

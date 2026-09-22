@@ -56,9 +56,9 @@ flowchart TD
   - Handles order intake: parses incoming order objects (customer contacts, delivery address, ordered items with serialized optical lens data) and persists records transactionally.
 - **Admin API (`backend/admin_api.php`)**:
   - Provides administrative endpoints for inventory CRUD operations, image file uploads, lens catalog management (brands, types, coatings), promo code administration, and order fulfillment status updates.
-- **Database Connection & Schema Bootstrapping (`backend/config.php`)**:
+- **Database Connection & Initialization (`backend/config.php`)**:
   - Centralizes the PDO connection using environment variables (`DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
-  - Includes a schema verification routine that checks required tables and columns during bootstrapping to guarantee database integrity across environments.
+  - The application checks required database tables and columns during initialization and applies the necessary schema updates.
 
 ### 3. Persistence Tier
 - **MySQL / MariaDB**:
